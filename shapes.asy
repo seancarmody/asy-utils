@@ -16,7 +16,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-path ngon(int n = 3, path segment = (0, 0)--E, bool cw = false) {
+path ngon(path segment = (0, 0)--E, int n = 3, bool cw = false) {
   real theta = 360/n;
   pair A, B;
 
