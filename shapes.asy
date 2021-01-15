@@ -16,12 +16,14 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-path ngon(int n = 3, path segment = (0, 0)--E) {
+path ngon(int n = 3, path segment = (0, 0)--E, bool cw = false) {
   real theta = 360/n;
   pair A, B;
 
   int last = size(segment);
   path ngon;
+  
+  if (cw) {theta = -theta;}
 
   for(int i = 0; i < n; ++i){
     A = point(segment, 0);
