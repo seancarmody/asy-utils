@@ -22,14 +22,25 @@ path ngon(path segment = (0, 0)--E, int n = 3, bool cw = false,
   pair A, B;
 
   path ngon;
+  real tol = 1e-12;
   
   if (cw) {theta = -theta;}
 
   for(int i = 0; i < n; ++i){
     A = point(segment, first);
     B = point(segment, last);
-    ngon  = ngon--segment;
+    if (length(ngon) >= 0 && 
+        length(point(ngon, length(ngon)) - point(segment, 0)) < tol && 
+        straight(segment, 0)) {
+      ngon  = ngon--subpath(segment, 1, length(segment));
+        } else{
+      ngon  = ngon--segment;        
+        }
     segment = rotate(theta, B) * shift(B - A) * segment;
+  }
+  
+  if (length(point(ngon, 0) -  point(ngon, length(ngon))) < tol) {
+    ngon = subpath(ngon, 0, length(ngon) - 1);
   }
   ngon = ngon--cycle;
   return ngon;
