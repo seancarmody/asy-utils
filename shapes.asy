@@ -16,17 +16,17 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-path ngon(path segment = (0, 0)--E, int n = 3, bool cw = false) {
+path ngon(path segment = (0, 0)--E, int n = 3, bool cw = false,
+    int first = 0, int last = length(segment)) {
   real theta = 360/n;
   pair A, B;
 
-  int last = size(segment);
   path ngon;
   
   if (cw) {theta = -theta;}
 
   for(int i = 0; i < n; ++i){
-    A = point(segment, 0);
+    A = point(segment, first);
     B = point(segment, last);
     ngon  = ngon--segment;
     segment = rotate(theta, B) * shift(B - A) * segment;
